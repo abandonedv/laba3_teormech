@@ -10,7 +10,7 @@ J = 0.5
 R = 0.5
 c = 2
 g = 9.81
-y0 = [0.5, 10, 0, 0]
+y0 = [-0.3, 0.6, -0.2, 0.3]
 LIM = 100
 t = np.linspace(0, 20, 1000)
 
@@ -139,56 +139,63 @@ if __name__ == "__main__":
     B = ax.plot(0, 0, 0.9, marker='o', color="brown")
     ax.text(0.1, 0.1, 1, "B")
 
-    fig_for_graph = plt.figure(figsize=[15, 15])
-    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 1)
+    fig_for_graph = plt.figure(figsize=[15, 10])
+    plt.subplots_adjust(left=0.1,
+                        bottom=0.1,
+                        right=0.9,
+                        top=0.9,
+                        wspace=0.4,
+                        hspace=0.4)
+
+    ax_for_graphs = fig_for_graph.add_subplot(5, 1, 1)
     ax_for_graphs.plot(t, x, color="blue")
     ax_for_graphs.set_title("x(t)")
     ax_for_graphs.set(xlim=[0, 20])
     ax_for_graphs.grid(True)
 
-    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 2)
+    ax_for_graphs = fig_for_graph.add_subplot(5, 3, 4)
     ax_for_graphs.plot(t, Phi, color="blue")
     ax_for_graphs.set_title("phi(t)")
     ax_for_graphs.set(xlim=[0, 5])
     ax_for_graphs.grid(True)
 
-    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 3)
+    ax_for_graphs = fig_for_graph.add_subplot(5, 3, 7)
     ax_for_graphs.plot(t, Tetta, color="blue")
     ax_for_graphs.set_title("tetta(t)")
     ax_for_graphs.set(xlim=[0, 5])
     ax_for_graphs.grid(True)
 
-    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 4)
+    ax_for_graphs = fig_for_graph.add_subplot(5, 3, 5)
     ax_for_graphs.plot(t, Phit, color="blue")
     ax_for_graphs.set_title("phi\'(t)")
     ax_for_graphs.set(xlim=[0, 5])
     ax_for_graphs.grid(True)
 
-    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 5)
+    ax_for_graphs = fig_for_graph.add_subplot(5, 3, 8)
     ax_for_graphs.plot(t, Tettat, color="blue")
     ax_for_graphs.set_title("tetta\'(t)")
     ax_for_graphs.set(xlim=[0, 5])
     ax_for_graphs.grid(True)
 
-    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 6)
+    ax_for_graphs = fig_for_graph.add_subplot(5, 3, 6)
     ax_for_graphs.plot(t, Phitt, color="blue")
     ax_for_graphs.set_title("phi\'\'(t)")
     ax_for_graphs.set(xlim=[0, 5])
     ax_for_graphs.grid(True)
 
-    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 7)
+    ax_for_graphs = fig_for_graph.add_subplot(5, 3, 9)
     ax_for_graphs.plot(t, Tettatt, color="blue")
     ax_for_graphs.set_title("tetta\'\'(t)")
     ax_for_graphs.set(xlim=[0, 5])
     ax_for_graphs.grid(True)
 
-    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 8)
+    ax_for_graphs = fig_for_graph.add_subplot(5, 2, 7)
     ax_for_graphs.plot(t, N1, color="blue")
     ax_for_graphs.set_title("N1(t)")
     ax_for_graphs.set(xlim=[0, 5])
     ax_for_graphs.grid(True)
 
-    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 9)
+    ax_for_graphs = fig_for_graph.add_subplot(5, 2, 8)
     ax_for_graphs.plot(t, N2, color="blue")
     ax_for_graphs.set_title("N2(t)")
     ax_for_graphs.set(xlim=[0, 5])
