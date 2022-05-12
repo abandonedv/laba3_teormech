@@ -11,7 +11,8 @@ R = 0.5
 c = 2
 g = 9.81
 y0 = [0.5, 10, 0, 0]
-t = np.linspace(0, 1000, 10000)
+LIM = 100
+t = np.linspace(0, 20, 1000)
 
 
 def SystemOfEquations(y, t):
@@ -100,13 +101,18 @@ if __name__ == "__main__":
     Tetta = res[:, 1]
     Phit = res[:, 2]
     Tettat = res[:, 3]
+    Phitt = [SystemOfEquations(y, t)[2] for y, t in zip(res, t)]
+    Tettatt = [SystemOfEquations(y, t)[3] for y, t in zip(res, t)]
 
-    angle = np.linspace(0, 2 * np.pi, 150)
+    angle = np.linspace(0, 2 * np.pi, 1000)
     radius = R
 
     x = R * np.sin(angle) * np.cos(Phi[0])
     y = -R * np.sin(angle) * np.sin(Phi[0])
     z = -R * np.cos(angle)
+
+    N1 = m * (R * (Tettat**2 + Phit**2 * np.sin(Tetta)**2) + g * np.cos(Tetta))
+    N2 = m * R * (Phitt * np.sin(Tetta) + 2 * Phit * Tettat * np.cos(Tetta))
 
     trubka = ax.plot(x, y, z)[0]
 
@@ -117,7 +123,7 @@ if __name__ == "__main__":
     Point2 = ax.plot(0, 0, 0, color=[0, 1, 0], marker='o')[0]
     AB = ax.plot([0, x[0]], [0, y[0]], [0, z[0]], color=[0, 0, 0], linestyle='dotted')[0]
 
-    a = FuncAnimation(fig=fig, func=Animation, frames=len(x), blit=True, interval=100)
+    a = FuncAnimation(fig=fig, func=Animation, frames=len(x), blit=True, interval=50)
 
     A = ax.plot(0, 0, 0.5, marker='o', color="green")
     ax.text(0.1, 0.1, 0.6, "A")
@@ -133,4 +139,60 @@ if __name__ == "__main__":
     B = ax.plot(0, 0, 0.9, marker='o', color="brown")
     ax.text(0.1, 0.1, 1, "B")
 
+    fig_for_graph = plt.figure(figsize=[15, 15])
+    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 1)
+    ax_for_graphs.plot(t, x, color="blue")
+    ax_for_graphs.set_title("x(t)")
+    ax_for_graphs.set(xlim=[0, 20])
+    ax_for_graphs.grid(True)
+
+    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 2)
+    ax_for_graphs.plot(t, Phi, color="blue")
+    ax_for_graphs.set_title("phi(t)")
+    ax_for_graphs.set(xlim=[0, 5])
+    ax_for_graphs.grid(True)
+
+    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 3)
+    ax_for_graphs.plot(t, Tetta, color="blue")
+    ax_for_graphs.set_title("tetta(t)")
+    ax_for_graphs.set(xlim=[0, 5])
+    ax_for_graphs.grid(True)
+
+    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 4)
+    ax_for_graphs.plot(t, Phit, color="blue")
+    ax_for_graphs.set_title("phi\'(t)")
+    ax_for_graphs.set(xlim=[0, 5])
+    ax_for_graphs.grid(True)
+
+    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 5)
+    ax_for_graphs.plot(t, Tettat, color="blue")
+    ax_for_graphs.set_title("tetta\'(t)")
+    ax_for_graphs.set(xlim=[0, 5])
+    ax_for_graphs.grid(True)
+
+    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 6)
+    ax_for_graphs.plot(t, Phitt, color="blue")
+    ax_for_graphs.set_title("phi\'\'(t)")
+    ax_for_graphs.set(xlim=[0, 5])
+    ax_for_graphs.grid(True)
+
+    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 7)
+    ax_for_graphs.plot(t, Tettatt, color="blue")
+    ax_for_graphs.set_title("tetta\'\'(t)")
+    ax_for_graphs.set(xlim=[0, 5])
+    ax_for_graphs.grid(True)
+
+    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 8)
+    ax_for_graphs.plot(t, N1, color="blue")
+    ax_for_graphs.set_title("N1(t)")
+    ax_for_graphs.set(xlim=[0, 5])
+    ax_for_graphs.grid(True)
+
+    ax_for_graphs = fig_for_graph.add_subplot(3, 3, 9)
+    ax_for_graphs.plot(t, N2, color="blue")
+    ax_for_graphs.set_title("N2(t)")
+    ax_for_graphs.set(xlim=[0, 5])
+    ax_for_graphs.grid(True)
+
     plt.show()
+
