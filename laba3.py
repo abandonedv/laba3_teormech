@@ -10,8 +10,14 @@ J = 0.5
 R = 0.5
 c = 2
 g = 9.81
-y0 = [-0.3, 0.6, -0.2, 0.3]
-LIM = 100
+phi0 = -0.3
+tetta0 = 0.6
+phit0 = -0.2
+tettat0 = 0.6
+y0 = [phi0, tetta0, phit0, tettat0]
+y01 = [10, 10, 0, 0]
+y02 = [-10, 20, -30, 40]
+
 t = np.linspace(0, 20, 1000)
 
 
@@ -95,7 +101,7 @@ if __name__ == "__main__":
     ax.set_ylim(-1, 1)
     ax.set_zlim(-1, 1)
 
-    res = odeint(SystemOfEquations, y0, t)
+    res = odeint(SystemOfEquations, y02, t)
 
     Phi = res[:, 0]
     Tetta = res[:, 1]
@@ -192,13 +198,13 @@ if __name__ == "__main__":
 
     ax_for_graphs = fig_for_graph.add_subplot(5, 2, 7)
     ax_for_graphs.plot(t, N1, color="blue")
-    ax_for_graphs.set_title("N1(t)")
+    ax_for_graphs.set_title("Nn(t)")
     ax_for_graphs.set(xlim=[0, 5])
     ax_for_graphs.grid(True)
 
     ax_for_graphs = fig_for_graph.add_subplot(5, 2, 8)
     ax_for_graphs.plot(t, N2, color="blue")
-    ax_for_graphs.set_title("N2(t)")
+    ax_for_graphs.set_title("Nb(t)")
     ax_for_graphs.set(xlim=[0, 5])
     ax_for_graphs.grid(True)
 
