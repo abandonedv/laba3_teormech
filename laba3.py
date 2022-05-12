@@ -140,6 +140,7 @@ if __name__ == "__main__":
     ax.text(0.1, 0.1, 1, "B")
 
     fig_for_graph = plt.figure(figsize=[15, 10])
+
     plt.subplots_adjust(left=0.1,
                         bottom=0.1,
                         right=0.9,
