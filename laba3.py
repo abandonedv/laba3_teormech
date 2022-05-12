@@ -32,7 +32,7 @@ def SystemOfEquations(y, t):
 
     A = [[a11, a12], [a21, a22]]
     A1 = [[b1, a12], [b2, a22]]
-    A2 = [[b1, a12], [b2, a22]]
+    A2 = [[a11, b1], [a21, b2]]
 
     yt[2] = np.linalg.det(A1) / np.linalg.det(A)
     yt[3] = np.linalg.det(A2) / np.linalg.det(A)
@@ -44,15 +44,15 @@ def Animation(t):
     global Phi, Tetta
 
     trubka.set_data_3d(R * np.sin(angle) * np.cos(Phi[t]),
-                       R * np.sin(angle) * np.sin(Phi[t]), z)
+                       -R * np.sin(angle) * np.sin(Phi[t]), z)
 
     Point.set_data_3d(R * np.sin(Tetta[t]) * np.cos(Phi[t]),
-                      R * np.sin(Tetta[t]) * np.sin(Phi[t]),
-                      R * np.cos(Tetta[t]))
+                      -R * np.sin(Tetta[t]) * np.sin(Phi[t]),
+                      -R * np.cos(Tetta[t]))
 
     AB.set_data_3d([0, R * np.sin(Tetta[t]) * np.cos(Phi[t])],
-                   [0, R * np.sin(Tetta[t]) * np.sin(Phi[t])],
-                   [0, R * np.cos(Tetta[t])])
+                   [0, -R * np.sin(Tetta[t]) * np.sin(Phi[t])],
+                   [0, -R * np.cos(Tetta[t])])
 
     return [trubka, Point, AB]
 
